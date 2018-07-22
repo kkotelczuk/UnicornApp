@@ -2,16 +2,26 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, View, Text} from 'react-native';
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import {TextInput} from '../../components/TextInput';
-import {Button} from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
+import { Button } from '../../components/Button';
 
 import { Wrapper, SeparatorWord } from './styled';
 
-type Props = {};
+import type { NavigationScreenProp } from 'react-navigation/src/TypeDefinition';
+
+type UserT = {
+  email: string,
+  password: string,
+  name: string,
+};
+
+type Props = {
+  navigation: NavigationScreenProp<any>,
+};
 export default class SignUp extends Component<Props> {
   state = {
     email: '',
@@ -21,13 +31,28 @@ export default class SignUp extends Component<Props> {
     errors: {}
   };
 
+  saveUser = async (user: Object<UserT>) => {
+    const userArray = [];
+
+    for (let element in user) {
+      userArray.push([`@UnicornAppStore:user:${element}`, user[element]])
+    }
+
+    userArray.push(['@UnicornAppStore:user:isAuthenticated', 'yes']);
+
+    try {
+      await AsyncStorage.multiSet(userArray);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   validateForm = () => {
     const { password, email, name } = this.state;
     const errors = {}
     const isPasswordValid = /^[0-9a-zA-Z]{6,}$/.test(password);
     const isEmailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
     const isNameValid =  /^[A-Za-z]+$/.test(name);
-    console.log('is', isNameValid)
     const isFormValid = isPasswordValid && isEmailValid && isNameValid;
 
     if (!isPasswordValid && password.length > 0) { errors.password = `Password must contain minimum 6 of letters or number.`; }
@@ -40,8 +65,10 @@ export default class SignUp extends Component<Props> {
     })
   }
 
-  onSubmit = () => {
-    console.log(this.state)
+  onSubmit = async () => {
+    const { errors, isValid, ...user } = this.state;
+
+    this.saveUser(user).then(() => this.props.navigation.navigate('Dashboard'));
   }
 
   render() {

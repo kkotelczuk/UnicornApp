@@ -12,7 +12,7 @@ export const Input = styled.TextInput`
   padding-vertical: 4px;
   font-size: 16;
 `;
-export const Error = styled.Text`
+export const ErrorWrapper = styled.Text`
   color: #E50000;
   font-size: 12;
 `;

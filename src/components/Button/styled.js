@@ -10,6 +10,10 @@ export const ButtonWrapper = styled.TouchableOpacity`
   ${({ outline }) => outline && `
     background-color: transparent;
   `}
+
+  ${({ disabled }) => disabled && `
+    background-color: #CEAAC8;
+  `}
 `;
 export const ButtonText = styled.Text`
   color: ${({ outline }) => (outline ? '#1653B0' : '#fff')};
