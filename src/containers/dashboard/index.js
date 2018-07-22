@@ -7,7 +7,6 @@ import Sound from 'react-native-sound';
 
 import { Button } from '../../components/Button';
 import { Title, Unicorn, Wrapper, Separator} from './styled';
-import {Button} from '../../components/Button';
 
 
 export default class Dashboard extends Component {
