@@ -1,7 +1,3 @@
-/**
- * @flow
- */
-
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
@@ -11,18 +7,7 @@ import { Button } from '../../components/Button';
 
 import { Wrapper, SeparatorWord } from './styled';
 
-import type { NavigationScreenProp } from 'react-navigation/src/TypeDefinition';
-
-type UserT = {
-  email: string,
-  password: string,
-  name: string,
-};
-
-type Props = {
-  navigation: NavigationScreenProp<any>,
-};
-export default class SignUp extends Component<Props> {
+export default class SignUp extends Component {
   state = {
     email: '',
     password: '',
@@ -31,7 +16,7 @@ export default class SignUp extends Component<Props> {
     errors: {}
   };
 
-  saveUser = async (user: Object<UserT>) => {
+  saveUser = async (user) => {
     const userArray = [];
 
     for (let element in user) {

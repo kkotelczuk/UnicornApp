@@ -1,7 +1,3 @@
-/**
- * @flow
- */
-
 import React, {Component} from 'react';
 import { KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
@@ -12,8 +8,7 @@ import { Banner } from '../../components/Banner';
 
 import { Wrapper, SeparatorWord } from './styled';
 
-type Props = {};
-export default class SignIn extends Component<Props> {
+export default class SignIn extends Component {
   state = {
     email: '',
     password: '',

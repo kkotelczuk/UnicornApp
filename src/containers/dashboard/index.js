@@ -8,7 +8,6 @@ import Sound from 'react-native-sound';
 import { Button } from '../../components/Button';
 import { Title, Unicorn, Wrapper, Separator} from './styled';
 
-
 export default class Dashboard extends Component {
   state = {
     userName: '',
@@ -48,7 +47,7 @@ export default class Dashboard extends Component {
   loadSound = async () => {
     this.unicornSong = new Sound('unicorns.mp3', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
-        console.log('failed to load the sound', error);
+        console.error('failed to load the sound', error);
         return false;
       }
       this.setState({ isSongReady: true });
@@ -97,7 +96,6 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state)
     const { userName, isPaused, isPlaying, isSongReady } = this.state;
     const marginLeft = this.animatedValue.interpolate({
       inputRange: [0, 1],
