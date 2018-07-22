@@ -3,46 +3,71 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, View, Text, KeyboardAvoidingView} from 'react-native';
+import { KeyboardAvoidingView, AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import {TextInput} from '../../components/TextInput';
-import {Button} from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
+import { Button } from '../../components/Button';
+import { Banner } from '../../components/Banner';
 
 import { Wrapper, SeparatorWord } from './styled';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 type Props = {};
 export default class SignIn extends Component<Props> {
   state = {
     email: '',
     password: '',
+    errors: {},
+    areCredentialsCorrect: undefined,
   }
 
-  onSubmit = () => {
-    console.log(this.state);
+  onSubmit = async () => {
+    const { password, email } = this.state;
+    const errors = {};
+    if (password.length <= 0) { errors.password = `Password is required`; }
+    if (email.length <= 0) { errors.email = `Email is required`; }
+
+    if (errors.password || errors.email) {
+      this.setState({ errors });
+      return;
+    }
+
+    const storedEmail = await AsyncStorage.getItem('@UnicornAppStore:user:email');
+    const storedPassword = await AsyncStorage.getItem('@UnicornAppStore:user:password');
+    const areCredentialsCorrect = storedEmail === email && storedPassword === password;
+
+    this.setState({ areCredentialsCorrect });
+
+    if (areCredentialsCorrect) {
+      await AsyncStorage.setItem('@UnicornAppStore:user:isAuthenticated', 'yes');
+      this.props.navigation.navigate('Dashboard');
+    }
   }
 
   render() {
     return (
       <Wrapper>
         <KeyboardAvoidingView behavior="padding" enabled>
+          {this.state.areCredentialsCorrect !== undefined &&
+            <Banner
+              isSuccess={this.state.areCredentialsCorrect}
+              errorMessage="Email or password is wrong, please try again or register"
+              successMessage="You have logIn successfully"
+            />
+          }
           <TextInput
             type="text"
             label="Email"
             placeholder="Type your email"
-            onChange={ email => this.setState({ email: email})}/>
+            onChange={ email => this.setState({ email: email})}
+            error={this.state.errors.email}
+            />
           <TextInput
             type="password"
             label="Password"
             placeholder="Type your password"
             onChange={ password => this.setState({ password: password})}
+            error={this.state.errors.password}
           />
           <Button
             primary={true}

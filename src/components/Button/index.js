@@ -2,20 +2,18 @@ import React from 'react';
 
 import { ButtonWrapper, ButtonText } from './styled';
 
-export const Button = ({ onPress, name, outline, primary, disabled}) => {
+export const Button = ({ onPress, name, icon, ...otherProps }) => {
   return (
     <ButtonWrapper
       onPress={onPress}
-      primary={primary}
-      outline={outline}
-      disabled={disabled}
+      {...otherProps}
     >
-      <ButtonText
-        primary={primary}
-        outline={outline}
-      >
-        {name}
-      </ButtonText>
+      {icon}
+      {name &&
+        <ButtonText {...otherProps}>
+          {name}
+        </ButtonText>
+        }
     </ButtonWrapper>
   )
 }

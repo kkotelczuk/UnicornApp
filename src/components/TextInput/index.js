@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InputWrapper, Label, Input, Error } from './styled';
+import { InputWrapper, Label, Input, ErrorWrapper } from './styled';
 
 export const TextInput = ({ label, type, onChange, placeholder, onEndEditing, error }) => {
   return (
@@ -14,7 +14,7 @@ export const TextInput = ({ label, type, onChange, placeholder, onEndEditing, er
         placeholder={placeholder}
         onEndEditing={onEndEditing}
       />
-      {error && <Error>{error}</Error>}
+      {error && <ErrorWrapper>{error}</ErrorWrapper>}
     </InputWrapper>
   )
 }

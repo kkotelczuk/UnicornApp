@@ -1,8 +1,7 @@
 {
   "javascript.validate.enable": false,
   "flow.useNPMPackagedFlow": true,
-  "editor.tokenColorCustomizations": {
-    "editorCursor.foreground": "#FFFF00"
-  }
+  "flow.runOnAllFiles": true,
+  "flow.enabled": true,
 
 }
