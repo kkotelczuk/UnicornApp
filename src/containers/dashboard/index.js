@@ -7,6 +7,8 @@ import Sound from 'react-native-sound';
 
 import { Button } from '../../components/Button';
 import { Title, Unicorn, Wrapper, Separator} from './styled';
+import {Button} from '../../components/Button';
+
 
 export default class Dashboard extends Component {
   state = {
@@ -87,6 +89,12 @@ export default class Dashboard extends Component {
       ],
       { cancelable: false }
     );
+  }
+
+
+  logout = async () => {
+    await AsyncStorage.removeItem('@UnicornAppStore:user:isAuthenticated');
+    this.props.navigation.navigate('SignIn');
   }
 
   render() {
