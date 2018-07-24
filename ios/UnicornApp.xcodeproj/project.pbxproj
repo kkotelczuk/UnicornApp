@@ -42,7 +42,6 @@
 		4DA1AC7E329B4F24886FFCDF /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6228ED0A77E440A296BFD894 /* MaterialIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		64BF24F2EFCC4F61BFB38F38 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67E40498BF8145D6A8A38E50 /* Octicons.ttf */; };
-		71CD711621048E430016E77A /* unicorns.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71CD711521048E430016E77A /* unicorns.mp3 */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9488F949045C494386C895A4 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DA114113DE64798A3614716 /* Entypo.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -375,7 +374,6 @@
 		6228ED0A77E440A296BFD894 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		67E40498BF8145D6A8A38E50 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		6DA114113DE64798A3614716 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		71CD711521048E430016E77A /* unicorns.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = unicorns.mp3; path = ../../../../../Downloads/unicorns.mp3; sourceTree = "<group>"; };
 		7764FF1206FB40228FCF01BD /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		7850F8BFAFE5400499844ADB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -664,7 +662,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				71CD711521048E430016E77A /* unicorns.mp3 */,
 				13B07FAE1A68108700A75B9A /* UnicornApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* UnicornAppTests */,
@@ -1165,7 +1162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				71CD711621048E430016E77A /* unicorns.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				9488F949045C494386C895A4 /* Entypo.ttf in Resources */,
 				046673103350448983755A58 /* EvilIcons.ttf in Resources */,
