@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Platform, View, AsyncStorage, Animated, Dimensions, Easing, Alert } from 'react-native';
+import {Platform, View, AsyncStorage, Animated, Dimensions, Easing, Alert, ActivityIndicator } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import nodeEmoji from 'node-emoji';
@@ -45,7 +45,7 @@ export default class Dashboard extends Component {
 
 
   loadSound = async () => {
-    this.unicornSong = new Sound('unicorns.mp3', Sound.MAIN_BUNDLE, (error) => {
+    this.unicornSong = new Sound('https://raw.githubusercontent.com/kkotelczuk/UnicornApp/master/unicornsSound.mp3', '', (error) => {
       if (error) {
         console.error('failed to load the sound', error);
         return false;
@@ -83,16 +83,22 @@ export default class Dashboard extends Component {
       'Good Bye',
       'You got logged out!',
       [
-        {text: 'OK', onPress: () => this.props.navigation.navigate('SignIn')},
+        {text: 'OK', onPress: () => {
+          this.unicornSong.stop();
+          this.unicornSong.release();
+          this.props.navigation.navigate('SignIn');
+        }},
       ],
       { cancelable: false }
     );
   }
 
+  renderIcon() {
+    const { isSongReady, isPaused, isPlaying } = this.state;
 
-  logout = async () => {
-    await AsyncStorage.removeItem('@UnicornAppStore:user:isAuthenticated');
-    this.props.navigation.navigate('SignIn');
+    return isSongReady ?
+      <Icon name={(isPaused || !isPlaying) ? 'ios-play' : 'ios-pause'} size={30} /> :
+      <ActivityIndicator size="large"/>
   }
 
   render() {
@@ -106,26 +112,26 @@ export default class Dashboard extends Component {
         <Title>Welcome {userName} to <Unicorn>{this.unicorn}</Unicorn> paradise!</Title>
 
         <Button
-            onPress={(isPaused || !isPlaying) ? this.playSound : this.pauseSound}
-            disabled={!isSongReady}
-            icon={<Icon name={(isPaused || !isPlaying) ? 'ios-play' : 'ios-pause'} size={30} />}
-          />
-          <Button
-            onPress={this.stopSound}
-            disabled={(!isSongReady || !isPlaying)}
-            icon={<Icon name="ios-square" size={30} />}
-          />
-          <Separator />
-          <Animated.View
-            style={{
-              marginLeft,
-              flexDirection: 'row',
-            }}
-          >
-            <Unicorn>{this.unicorn}</Unicorn>
-            <Unicorn>{this.unicorn}</Unicorn>
-            <Unicorn>{this.unicorn}</Unicorn>
-          </Animated.View>
+          onPress={(isPaused || !isPlaying) ? this.playSound : this.pauseSound}
+          disabled={!isSongReady}
+          icon={this.renderIcon()}
+        />
+        <Button
+          onPress={this.stopSound}
+          disabled={(!isSongReady || !isPlaying)}
+          icon={<Icon name="ios-square" size={30} />}
+        />
+        <Separator />
+        <Animated.View
+          style={{
+            marginLeft,
+            flexDirection: 'row',
+          }}
+        >
+          <Unicorn>{this.unicorn}</Unicorn>
+          <Unicorn>{this.unicorn}</Unicorn>
+          <Unicorn>{this.unicorn}</Unicorn>
+        </Animated.View>
 
         <Button
             outline={true}
